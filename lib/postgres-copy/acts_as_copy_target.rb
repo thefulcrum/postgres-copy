@@ -50,6 +50,9 @@ module PostgresCopy
                            quote = options[:quote] == "'" ? "''" : options[:quote]
                            "DELIMITER '#{options[:delimiter]}' QUOTE '#{quote}' CSV"
                          end
+
+        options_string += " encoding '#{options[:encoding]}'" if options[:encoding].present?
+
         io = path_or_io.instance_of?(String) ? File.open(path_or_io, 'r') : path_or_io
 
         if options[:format] == :binary
